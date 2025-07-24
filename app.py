@@ -27,14 +27,12 @@ def login():
         if submit:
             if username in VALID_USERS and VALID_USERS[username] == password:
                 st.session_state.logged_in = True
-                st.success("✅ Login successful! Please interact with the app or refresh to continue.")
-                st.stop()  # Halt execution so on next interaction main app loads
+                st.success("✅ Login successful!")
+                # Show reload button to continue to app
+                if st.button("🔄 Click here to reload the app"):
+                    st.experimental_rerun()
             else:
                 st.error("❌ Invalid username or password")
-
-if not st.session_state.logged_in:
-    login()
-    st.stop()
 
 def logout():
     st.session_state.logged_in = False
